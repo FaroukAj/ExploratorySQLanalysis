@@ -23,7 +23,10 @@ ORDER BY total_spent DESC
 LIMIT 10;
 
 -- Calculate the average age and gender distribution of customers who shop at each shopping mall.
-SELECT  COUNT(DISTINCT customer_id) AS customer_count, AVG(age), SUM(CASE WHEN gender ='Female' THEN 1 ELSE 0 END) AS 'Female_count', SUM(CASE WHEN gender ='Male' THEN 1 ELSE 0 END) AS 'Male_count', shopping_mall
+SELECT  COUNT(DISTINCT customer_id) AS customer_count, 
+AVG(age), 
+SUM(CASE WHEN gender ='Female' THEN 1 ELSE 0 END) AS 'Female_count', 
+SUM(CASE WHEN gender ='Male' THEN 1 ELSE 0 END) AS 'Male_count', shopping_mall
 FROM customerdata
 GROUP BY shopping_mall;
 
@@ -43,7 +46,9 @@ ORDER BY age_group, purchase_count DESC;
 
 -- Find the average revenue generated per day for each shopping mall.
 WITH avg_rev AS (
-SELECT shopping_mall,invoice_date AS Date, ROUND(AVG(quantity*price), 2) AS Avg_revenue
+SELECT shopping_mall,
+	invoice_date AS Date, 
+	ROUND(AVG(quantity*price), 2) AS Avg_revenue
 FROM customerdata
 GROUP BY shopping_mall, invoice_date
 ORDER BY Shopping_mall
