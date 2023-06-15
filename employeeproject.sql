@@ -82,7 +82,8 @@ FROM employeedata;
 /*UPDATE employeedata
 SET orighiredate_key = (select str_to_date(orighiredate_key, '%m/%d/%Y')); */
 
-SELECT   YEAR(orighiredate_key) AS Year_of_hire, COUNT(employeeID) AS Employee_count
+SELECT   YEAR(orighiredate_key) AS Year_of_hire, 
+	 COUNT(employeeID) AS Employee_count
 FROM Employeedata
 GROUP BY  YEAR(orighiredate_key)
 ORDER BY Employee_count DESC;
