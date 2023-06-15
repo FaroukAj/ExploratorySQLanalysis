@@ -11,17 +11,20 @@ SELECT * FROM supermarket;
 SELECT (ROUND(SUM(Total),2))
 FROM supermarket;
 
-SELECT Branch, (ROUND(SUM(Total),2)) AS Total_revenue
+SELECT Branch, 
+       (ROUND(SUM(Total),2)) AS Total_revenue
 FROM supermarket
 GROUP BY Branch
 ORDER BY Branch;
 
-SELECT Product_line,(ROUND(SUM(Total),2)) AS Total_revenue
+SELECT Product_line,
+       (ROUND(SUM(Total),2)) AS Total_revenue
 FROM supermarket
 GROUP BY Product_line
 ORDER BY product_line;
 
-SELECT Branch, Product_line, (ROUND(SUM(Total),2)) AS Total_revenue
+SELECT Branch, 
+       Product_line, (ROUND(SUM(Total),2)) AS Total_revenue
 FROM supermarket
 GROUP BY Branch, Product_line
 ORDER BY Branch;
@@ -29,7 +32,8 @@ ORDER BY Branch;
 
 -- Calculate the average unit price for each product line and identify the top-selling and highest-priced products.
 
-SELECT Product_line, ROUND(AVG(Unit_price),2) AS Avg_product_line_price
+SELECT Product_line, 
+       ROUND(AVG(Unit_price),2) AS Avg_product_line_price
 FROM supermarket
 GROUP BY Product_line;
 
@@ -44,7 +48,8 @@ SELECT * FROM Avg_rating;
 
 
 -- Analyze the distribution of payment methods used by customers and identify the most common payment method for each branch.
-SELECT payment, COUNT(Payment)
+SELECT payment, 
+       COUNT(Payment)
 FROM supermarket
 GROUP BY Payment;
 
@@ -68,12 +73,16 @@ UPDATE supermarket
 SET Date = (SELECT STR_TO_DATE(Date, '%m/%d/%y')
 );
 
-SELECT Date, ROUND(SUM(Total),2) AS Daily_Total
+SELECT Date, 
+       ROUND(SUM(Total),2) AS Daily_Total
 FROM supermarket
 GROUP BY Date
 ORDER BY ROUND(SUM(Total),2) DESC;
 
-SELECT monthname(Date) AS Month, ROUND(SUM(Total),2) AS Monthly_Total
+
+
+SELECT monthname(Date) AS Month, 
+       ROUND(SUM(Total),2) AS Monthly_Total
 FROM supermarket
 GROUP BY  monthname(Date)
 ORDER BY ROUND(SUM(Total),2) DESC;
@@ -89,9 +98,10 @@ ROUND(SUM(Five_percent_tax),2) AS Total_tax_on_each_product
 FROM supermarket
 GROUP BY Product_line
 )
-SELECT Product_line, Total_revenue_per_product, 
-Total_tax_on_each_product,
-(Total_tax_on_each_product/Total_revenue_per_product * 100.00) AS Tax_percentage
+SELECT Product_line, 
+       Total_revenue_per_product, 
+       Total_tax_on_each_product,
+       (Total_tax_on_each_product/Total_revenue_per_product * 100.00) AS Tax_percentage
 FROM revenue_percent;
 
 
@@ -101,13 +111,17 @@ ROUND(SUM(Five_percent_tax),2) AS Total_tax_at_each_branch
 FROM supermarket
 GROUP BY Branch
 )
-SELECT Branch, Total_revenue_per_branch, 
+SELECT Branch,
+       Total_revenue_per_branch, 
 Total_tax_at_each_branch,
 (Total_tax_at_each_branch/Total_revenue_per_branch * 100.00) AS Branch_tax_percentage
 FROM branch_percent;
 
 
+
+
 -- Compare sales performance across different cities, determine the city with the highest sales.
-SELECT DISTINCT City, ROUND(Sum(Total),2), RANK() OVER (ORDER BY Sum(Total) DESC) AS City_revenue_rank
+SELECT DISTINCT City, 
+                ROUND(Sum(Total),2), RANK() OVER (ORDER BY Sum(Total) DESC) AS City_revenue_rank
 FROM supermarket
 GROUP BY City
