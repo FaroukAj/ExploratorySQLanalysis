@@ -3,7 +3,9 @@ USE groceries;
 SELECT * FROM players;
 
 -- Calculate the average height, weight, and age of players by position.
-SELECT DISTINCT Position, ROUND(AVG(Height_CM/30.48),2) AS AVG_Height , AVG(Weight) AS AVG_Weight, AVG(Age) AS AVG_Age
+SELECT DISTINCT Position, 
+       ROUND(AVG(Height_CM/30.48),2) AS AVG_Height , 
+       AVG(Weight) AS AVG_Weight, AVG(Age) AS AVG_Age
 FROM players
 GROUP BY position;
 
@@ -12,7 +14,7 @@ WITH team_switch AS (
 SELECT f.season, COUNT( DISTINCT f.player)
 FROM players f
 JOIN players s
-WHERE f.team <> s.team AND f.season > s.season
+WHERE f.team != s.team AND f.season > s.season
 GROUP BY f.season
 )
 SELECT * FROM team_switch;
@@ -40,12 +42,14 @@ LEFT JOIN four_years fy
 ON pp.Draft_year = fy.Draft_year;
 
 -- Determine the total number of players who were drafted each year.
-SELECT Draft_year, COUNT(DISTINCT Player) 
+SELECT Draft_year, 
+       COUNT(DISTINCT Player) 
 FROM players
 GROUP BY Draft_year;
 
 -- Calculate the average number of seasons in the league for each position.
-SELECT DISTINCT Position, ROUND(AVG(Seasons_in_league))
+SELECT DISTINCT Position, 
+       ROUND(AVG(Seasons_in_league))
 FROM players
 GROUP BY Position;
 
