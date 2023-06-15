@@ -11,12 +11,14 @@ WHERE profession = "";
 
 
 -- Calculate the average annual income and spending score for each gender.
-SELECT Gender, ROUND(AVG(Annual_income),2)AS Avg_salary, AVG(spending_score)
+SELECT Gender, 
+       ROUND(AVG(Annual_income),2)AS Avg_salary, AVG(spending_score)
 FROM customerinfo
 GROUP BY Gender;
 
 -- Find the top 5 professions with the highest average annual income.
-SELECT Profession, ROUND(AVG(Annual_income),2)AS Avg_salary
+SELECT Profession, 
+       ROUND(AVG(Annual_income),2)AS Avg_salary
 FROM customerinfo
 GROUP BY Profession
 ORDER BY Avg_salary DESC
@@ -38,13 +40,15 @@ GROUP BY Age_group;
 
 
 -- Determine the 5 highest AND LOWEST customer count per profession
-SELECT Profession, COUNT(CustomerID) AS customer_count
+SELECT Profession, 
+       COUNT(CustomerID) AS customer_count
 FROM customerinfo
 GROUP BY Profession 
 ORDER BY customer_count DESC
 LIMIT 5;
 
-SELECT Profession, COUNT(CustomerID) AS customer_count
+SELECT Profession,
+       COUNT(CustomerID) AS customer_count
 FROM customerinfo
 GROUP BY Profession 
 ORDER BY customer_count ASC
@@ -52,12 +56,16 @@ LIMIT 5;
 
 
 -- Find the TOP 10 customers with the highest and lowest spending score and their corresponding professions.
-SELECT CustomerID, spending_score, profession
+SELECT CustomerID, 
+       spending_score, 
+       profession
 FROM customerinfo
 ORDER BY spending_score DESC
 LIMIT 10;
 
-SELECT CustomerID, spending_score, profession
+SELECT CustomerID, 
+       spending_score, 
+       profession
 FROM customerinfo
 ORDER BY spending_score ASC
 LIMIT 10;
